@@ -8,9 +8,17 @@ import {
     HistoryButtonGroup,
     Toolbar,
     VerticalDivider,
-    Remirror, EditorComponent, useRemirror,
+    ToggleCodeButton,
+    ToggleCodeBlockButton,
+    Remirror, EditorComponent, useRemirror
 } from '@remirror/react';
-import { PlaceholderExtension, StrikeExtension, wysiwygPreset } from "remirror/extensions";
+import {
+    PlaceholderExtension,
+    StrikeExtension,
+    CodeBlockExtension,
+    CodeExtension,
+    wysiwygPreset
+} from "remirror/extensions";
 import React from "react";
 
 const placeholder = 'Enter some text...'
@@ -19,30 +27,37 @@ const placeholder = 'Enter some text...'
 const MyToolbar: React.FC = () => {
     return (
         <div className="toolbar-wrapper">
-        <Toolbar>
-            <HistoryButtonGroup/>
-            <VerticalDivider/>
-            <DataTransferButtonGroup/>
-            <VerticalDivider/>
-            <BasicFormattingButtonGroup/>
-            <VerticalDivider/>
-            <HeadingLevelButtonGroup/>
-        </Toolbar>
+            <Toolbar>
+                <HistoryButtonGroup/>
+                <VerticalDivider/>
+                <DataTransferButtonGroup/>
+                <VerticalDivider/>
+                <BasicFormattingButtonGroup/>
+                <ToggleCodeButton/>
+                <ToggleCodeBlockButton/>
+                <VerticalDivider/>
+                <HeadingLevelButtonGroup/>
+            </Toolbar>
         </div>
     )
 }
 
 
 const Editor: React.FC = () => {
-    const { manager } = useRemirror({
-        builtin: { persistentSelectionClass: 'selection' },
-        extensions: () => [new PlaceholderExtension({ placeholder }), new StrikeExtension(), ...wysiwygPreset()],
+    const {manager} = useRemirror({
+        builtin: {persistentSelectionClass: 'selection'},
+        extensions: () => [
+            new PlaceholderExtension({placeholder}),
+            new StrikeExtension(),
+            new CodeExtension(),
+            new CodeBlockExtension(),
+            ...wysiwygPreset()],
     });
     return (
         <div className="remirror-theme">
             <Remirror manager={manager}>
-                <MyToolbar />
-                <EditorComponent />
+                <MyToolbar/>
+                <EditorComponent/>
             </Remirror>
         </div>
     );

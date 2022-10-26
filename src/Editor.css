@@ -14,6 +14,13 @@
     font-size: var(--rmr-font-size-6);
 }*/
 
+.remirror-theme :not(pre) > code {
+    background-color: var(--rmr-color-code-background);
+    padding: 2px 3px;
+    border-radius: var(--rmr-radius-border);
+    border: var(--rmr-color-table-default-border) 1px solid;
+}
+
 .MuiToggleButton-root {
     padding: 10px !important;
 }
@@ -27,14 +34,22 @@
 
 .remirror-editor-wrapper {
     padding-top: 0;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .remirror-theme .ProseMirror {
+    height: 100%;
     padding: var(--rmr-space-5);
     padding-top: var(--rmr-space-4);
 }
 
 .remirror-theme {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+
     --rmr-color-background: #ffffff;
     --rmr-color-border: rgba(0, 0, 0, 0);
     --rmr-color-foreground: #000000;
@@ -70,6 +85,7 @@
     --rmr-color-shadow-3: rgba(10, 31, 68, 0.12);
     --rmr-color-backdrop: rgba(0, 0, 0, 0.9);
     --rmr-color-outline: rgba(0,0,0,0);
+    --rmr-color-code-background: hsl(0, 0%, 92%);
     --rmr-color-table-default-border: hsla(0, 0%, 80%, 1);
     --rmr-color-table-default-cell: hsla(0, 0%, 40%, 1);
     --rmr-color-table-default-controller: #dee2e6;
