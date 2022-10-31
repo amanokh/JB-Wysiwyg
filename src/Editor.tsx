@@ -10,7 +10,7 @@ import {
     VerticalDivider,
     ToggleCodeButton,
     ToggleCodeBlockButton,
-    Remirror, EditorComponent, useRemirror
+    Remirror, EditorComponent, useRemirror, useEditorState
 } from '@remirror/react';
 import {
     PlaceholderExtension,
@@ -20,6 +20,7 @@ import {
     wysiwygPreset
 } from "remirror/extensions";
 import React from "react";
+import { SpellExtension } from './SpellExtension';
 
 const placeholder = 'Enter some text...'
 
@@ -42,20 +43,44 @@ const MyToolbar: React.FC = () => {
     )
 }
 
+const Logger: React.FC = () => {
+    const {doc} = useEditorState();
+
+    return (
+        <p>{doc.toString()}</p>
+    );
+}
+
+const SuggestView: React.FC = () => {
+    const array = ['lol', 'test', 'kek']
+    return (
+        <div className="suggest-view">
+            {array.map((value) => (
+                <span key={value} className="suggest-view-variant">{value}</span>
+            ))}
+            <span className="suggest-view-variant ignore">Ignore</span>
+        </div>
+    )
+};
+
 
 const Editor: React.FC = () => {
     const {manager} = useRemirror({
-        builtin: {persistentSelectionClass: 'selection'},
+        // builtin: {persistentSelectionClass: 'selection'},
         extensions: () => [
             new PlaceholderExtension({placeholder}),
             new StrikeExtension(),
             new CodeExtension(),
             new CodeBlockExtension(),
+            new SpellExtension(),
             ...wysiwygPreset()],
     });
+
     return (
-        <div className="remirror-theme">
+        <div className="remirror-theme" spellCheck={false}>
             <Remirror manager={manager}>
+                {/*<SuggestView/>*/}
+                {/*<Logger/>*/}
                 <MyToolbar/>
                 <EditorComponent/>
             </Remirror>
@@ -63,4 +88,4 @@ const Editor: React.FC = () => {
     );
 };
 
-export default Editor;
+export {Editor, SuggestView};

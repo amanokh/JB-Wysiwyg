@@ -15,10 +15,17 @@
     "@types/node": "^16.11.68",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "dictionary-en": "^3.2.0",
+    "fs": "^0.0.1-security",
+    "nspell": "^2.1.5",
+    "path": "^0.12.7",
+    "path-browserify": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "remirror": "^2.0.11",
+    "serve": "^14.0.1",
+    "stream": "^0.0.2",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
@@ -45,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/nspell": "^2.1.3"
   }
 }
