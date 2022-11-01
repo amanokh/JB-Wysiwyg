@@ -19,37 +19,44 @@
     flex-direction: column;
     min-width: 72px;
     width: fit-content;
+    overflow: hidden;
 
-    background-color: hsla(0, 0%, 100%, 0.2);
-    backdrop-filter: blur(10px);
+    margin-top: 4px;
+    position: absolute;
+    z-index: 100;
+
+    background-color: var(--rmr-color-background);
     border-radius: var(--rmr-radius-border);
     border: var(--rmr-color-table-default-border) 1px solid;
+    box-shadow: 0 0 4px 2px hsla(0, 0%, 50%, 0.1);
 }
 
 .suggest-view-variant {
-    padding: 0 var(--rmr-space-1);
+    padding: 0 6px;
     color: var(--rmr-color-active-primary);
 }
 
+.suggest-view-variant.ignore:not(:first-child) {
+    border-top: var(--rmr-color-shadow-3) 1px solid;
+}
+
 .suggest-view-variant.ignore {
-    font-style: italic;
     font-size: var(--rmr-font-size-1);
-    border-top: var(--rmr-color-table-default-border) 1px solid;
     color: var(--rmr-color-active-faded);
 }
 
 .suggest-view-variant:hover {
-    background-color: var(--rmr-color-hover-background);
+    background-color: hsla(0, 0%, 50%, 0.05);
     cursor: pointer;
 }
 
 .spell-error {
-    background-color: rgba(255, 133, 133, 0.15);
+    background-color: rgba(255, 133, 133, 0.12);
     border-bottom: rgba(183, 23, 23, 0.5) 2px solid;
 }
 
 .spell-error:hover, .spell-error:active, .spell-error:focus-within, .spell-error::target-text {
-    background-color: rgba(255, 133, 133, 0.3);
+    background-color: rgba(255, 133, 133, 0.25);
 }
 
 .remirror-theme :not(pre) > code {
@@ -64,9 +71,7 @@
 }
 
 .toolbar-wrapper {
-    padding-left: var(--rmr-space-5);
-    padding-top: var(--rmr-space-4);
-    padding-bottom: var(--rmr-space-4);
+    padding: var(--rmr-space-4) var(--rmr-space-5);
     border-bottom: var(--rmr-color-shadow-3) 1px solid;
 }
 
@@ -267,7 +272,7 @@
     --rmr-hue-orange-7: #f76707;
     --rmr-hue-orange-8: #e8590c;
     --rmr-hue-orange-9: #d9480f;
-    --rmr-radius-border: 0.25rem;
+    --rmr-radius-border: 0.2rem;
     --rmr-radius-extra: 0.5rem;
     --rmr-radius-circle: 50%;
     --rmr-font-family-default: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -308,4 +313,17 @@
     font-family: var(--rmr-font-family-default);
     line-height: var(--rmr-line-height-default);
     font-weight: var(--rmr-font-weight-default);
+}
+
+@media only screen and (max-width: 480px) {
+    .remirror-theme {
+        --rmr-space-1: 2px;
+        --rmr-space-2: 4px;
+        --rmr-space-3: 8px;
+        --rmr-space-4: 16px;
+        --rmr-space-5: 32px;
+        --rmr-space-6: 64px;
+        --rmr-space-7: 128px;
+        --rmr-space-8: 256px;
+    }
 }

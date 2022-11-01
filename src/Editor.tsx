@@ -9,21 +9,42 @@ import {
     Toolbar,
     VerticalDivider,
     ToggleCodeButton,
-    ToggleCodeBlockButton,
-    Remirror, EditorComponent, useRemirror, useEditorState
+    Remirror, EditorComponent, useRemirror
 } from '@remirror/react';
 import {
     PlaceholderExtension,
     StrikeExtension,
-    CodeBlockExtension,
     CodeExtension,
     wysiwygPreset
 } from "remirror/extensions";
-import React from "react";
+import React, { useState } from "react";
 import { SpellExtension } from './SpellExtension';
 
 const placeholder = 'Enter some text...'
 
+export interface SuggestViewProps {
+    x: number,
+    y: number,
+    word: string,
+    suggestionsArray: string[],
+    doCorrectionCallback?: (word: string) => void
+    addToDictCallback?: (word: string) => void
+}
+
+const SuggestView = ({x, y, word, suggestionsArray, doCorrectionCallback, addToDictCallback}: SuggestViewProps) => {
+    return (
+        <div className="suggest-view"
+             style={{
+                 left: x,
+                 top: y,
+             }}>
+            {suggestionsArray.map((value) => (
+                <span key={value} onClick={() => doCorrectionCallback && doCorrectionCallback(value)} className="suggest-view-variant">{value}</span>
+            ))}
+            <span onClick={() => addToDictCallback && addToDictCallback(word)} className="suggest-view-variant ignore">Add to dictionary</span>
+        </div>
+    )
+};
 
 const MyToolbar: React.FC = () => {
     return (
@@ -35,7 +56,6 @@ const MyToolbar: React.FC = () => {
                 <VerticalDivider/>
                 <BasicFormattingButtonGroup/>
                 <ToggleCodeButton/>
-                <ToggleCodeBlockButton/>
                 <VerticalDivider/>
                 <HeadingLevelButtonGroup/>
             </Toolbar>
@@ -43,46 +63,33 @@ const MyToolbar: React.FC = () => {
     )
 }
 
-const Logger: React.FC = () => {
-    const {doc} = useEditorState();
-
-    return (
-        <p>{doc.toString()}</p>
-    );
-}
-
-const SuggestView: React.FC = () => {
-    const array = ['lol', 'test', 'kek']
-    return (
-        <div className="suggest-view">
-            {array.map((value) => (
-                <span key={value} className="suggest-view-variant">{value}</span>
-            ))}
-            <span className="suggest-view-variant ignore">Ignore</span>
-        </div>
-    )
-};
-
 
 const Editor: React.FC = () => {
+    const [suggestViewProps, setSuggestViewProps] = useState<SuggestViewProps>({
+        word: "",
+        suggestionsArray: [],
+        x: -99999,
+        y: -99999
+    })
+
     const {manager} = useRemirror({
         // builtin: {persistentSelectionClass: 'selection'},
         extensions: () => [
             new PlaceholderExtension({placeholder}),
             new StrikeExtension(),
             new CodeExtension(),
-            new CodeBlockExtension(),
-            new SpellExtension(),
+            new SpellExtension(setSuggestViewProps),
             ...wysiwygPreset()],
     });
+
+    const suggestView = SuggestView(suggestViewProps)
 
     return (
         <div className="remirror-theme" spellCheck={false}>
             <Remirror manager={manager}>
-                {/*<SuggestView/>*/}
-                {/*<Logger/>*/}
+                {suggestView}
                 <MyToolbar/>
-                <EditorComponent/>
+                <EditorComponent />
             </Remirror>
         </div>
     );
