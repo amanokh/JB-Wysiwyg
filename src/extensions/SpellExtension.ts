@@ -27,7 +27,7 @@ export class SpellExtension extends PlainExtension {
             state: {
                 init(_) {},
                 apply(tr, _, __, state) {
-                    // get the new pluginState for decorations
+                    // process all updates in the document and do spellcheck here
                     return pluginState.apply(tr, state);
                 }
             },
@@ -58,7 +58,7 @@ export class SpellExtension extends PlainExtension {
                     const addToDictionary = (word: string) => {
                         pluginState.nSpell?.add(word)
 
-                        // update whole document
+                        // update the whole document
                         const nodes: NodeWithPosition[] = []
                         const s = view.state
                         s.doc.nodesBetween(0, s.doc.content.size, (node, pos) => {
@@ -71,7 +71,7 @@ export class SpellExtension extends PlainExtension {
                         clearSuggests();
                     }
 
-                    // get suggestions and pass them to SuggestView
+                    // get suggestions and pass them to SuggestPopup
                     setSuggests({
                         x: view.coordsAtPos(decoStart).left,
                         y: view.coordsAtPos(pos).bottom,

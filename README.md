@@ -1,46 +1,69 @@
-# Getting Started with Create React App
+# Simple Wysiwyg Editor with spell-checking
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![](images/splash.jpg "Preview")
+## Available features
+- Spellchecking in English
+- Highlighting of errors
+- Choosing suggestions by click
 
-## Available Scripts
+
+- Undo/Redo history
+- Copy/Cut/Paste
+- Bold, underline, italic decorations
+- Headings
+- Inline code blocks
+
+
+
+### Run locally
 
 In the project directory, you can run:
 
-### `npm start`
+```
+npm i
+npm run start
+```
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Run tests
 
-### `npm test`
+`npm test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Libraries used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [Remirror](https://github.com/remirror/remirror) (based on Prosemirror)
+- [nSpell](https://github.com/wooorm/nspell)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### `npm run eject`
+### How dictionaries are stored
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Dictionaries are stored in plain `.dic` and `.aff` files in `/public/dictionaries` folder. By default, English dictionaries are stored.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`.dic` file is a dictionary (in its usual sense), containing all known words. Each word may **optionally** be followed by a slash `/` and one or more flags, which represents affixes or special attributes ([usage](http://pwet.fr/man/linux/fichiers_speciaux/hunspell/#:~:text=Hunspell(1)%20requires%20two%20files,of%20words%2C%20one%20per%20line.)).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+First line of the file must contain the total number of words in dictionary.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+_Example:_
+```text
+4
+lol
+kek
+cheburek
+smesharik
+```
+`.aff` file contains a list of rules and other options for hunspell-like checkers, that may improve their quality. **May be omitted.**
 
-## Learn More
+Examples of dictionaries for other languages can be found [here](https://github.com/wooorm/dictionaries/).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Demo / Where to find a built version
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Production version is automatically built directly to [/gh-pages](https://github.com/amanokh/JB-Wysiwyg/tree/gh-pages) branch on each commit, using Github Workflows.
+
+The current state is available at https://wysiwyg.manokh.com.
