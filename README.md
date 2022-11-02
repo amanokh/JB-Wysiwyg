@@ -37,6 +37,8 @@ Launches the test runner in the interactive watch mode.
 
 - [Remirror](https://github.com/remirror/remirror) (based on Prosemirror)
 - [nSpell](https://github.com/wooorm/nspell)
+- [jest-remirror](https://github.com/remirror/remirror/tree/HEAD/packages/jest-remirror)
+- [jest-fetch-mocks](https://github.com/jefflau/jest-fetch-mock#readme)
 
 Project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
