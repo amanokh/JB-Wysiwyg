@@ -38,12 +38,14 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^29.2.1",
     "@types/node": "^16.11.68",
     "@types/nspell": "^2.1.3",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "jest-fetch-mock": "^3.0.3",
     "jest-remirror": "^2.0.8",
     "react-scripts": "^5.0.1",
     "typescript": "^4.8.4"
