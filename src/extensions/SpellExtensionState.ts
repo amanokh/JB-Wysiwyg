@@ -7,7 +7,7 @@ import {getCursor} from "remirror";
 import {SpellExtension} from "./SpellExtension";
 
 const loadDictionary = async (filename: string): Promise<string> => {
-    const req = await window.fetch(filename)
+    const req = await fetch(filename)
     return req.text()
 }
 

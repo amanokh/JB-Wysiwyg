@@ -1,15 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
-import Editor from "./components/Editor";
-
-const App = () => {
-    return (
-        <div className="App">
-            <Editor />
-        </div>
-    );
-}
+import App from "./App";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,5 +12,3 @@ root.render(
       <App/>
   </React.StrictMode>
 );
-
-export {App};
